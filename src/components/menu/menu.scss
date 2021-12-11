@@ -1,0 +1,71 @@
+.menu {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .toggle {
+    position: absolute;
+    transition: all ease 0.5s;
+    z-index: 2;
+    animation: rotate 5s infinite ease;
+
+    &.active {
+      transform: rotate(360deg);
+    }
+    img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+  }
+  li {
+    list-style: none;
+    position: absolute;
+    transform-origin: 200px;
+    left: 0;
+    transition: 0.5s;    
+    transform: rotate(0deg) translateX(160px);
+
+    &.active {
+      @for $i from 2 through 5 {
+        &:nth-child(#{$i}) {
+          transform: rotate(calc(360deg / 4 * #{$i}));
+        }            
+      }
+    } ;
+    @for $i from 2 through 5 {
+        &:nth-child(#{$i}) {
+            img{
+                transform: rotate(calc(360deg / -4 * #{$i}));
+            }
+        }
+    }
+  
+    img {
+        background-color: gray;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: contain;        
+      }
+  }
+}
+
+@keyframes rotate {
+    0% {transform: rotate(60deg)} ;
+    25% {transform: rotate(0deg)} ;
+    50% {transform: rotate(-60deg)} ;
+    75% {transform: rotate(0deg)} ;
+    100% {transform: rotate(60deg)} ;
+};
+
+@keyframes reverseRotate {
+    0% {transform: rotate(-45deg)} ;
+    25% {transform: rotate(0deg)} ;
+    50% {transform: rotate(45deg)} ;
+    75% {transform: rotate(0deg)} ;
+    100% {transform: rotate(-45deg)} ;
+}
